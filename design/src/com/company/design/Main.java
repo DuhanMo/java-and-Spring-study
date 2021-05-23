@@ -15,6 +15,7 @@ import com.company.design.proxy.IBrowser;
 import com.company.design.singleton.AClazz;
 import com.company.design.singleton.BClazz;
 import com.company.design.singleton.SocketClient;
+import com.company.design.strategy.*;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -133,15 +134,37 @@ public class Main {
         reader.fileDisconnect();
         writer.fileDisconnect();
         ftpClient.disConnect();
-        
-         */
+
+
 
         SftpClient sftpClient = new SftpClient("www.foo.co.kr", 22, "/home/etc", "text.tmp");
         sftpClient.connect();
         sftpClient.write();
         sftpClient.read();
         sftpClient.disConnect();
+        */
+        Encoder encoder = new Encoder();
 
+        // base64
+        EncodingStrategy base64 = new Base64Strategy();
+
+        // normal
+        EncodingStrategy normal = new NormalStrategy();
+
+        String message = "hello java";
+        encoder.setEncodingStrategy(base64);
+        String base64Result = encoder.getMessage(message);
+        System.out.println(base64Result);
+
+        encoder.setEncodingStrategy(normal);
+        String normalResult = encoder.getMessage(message);
+        System.out.println(normalResult);
+
+        // Append Strategy
+        EncodingStrategy append = new AppendStrategy();
+        encoder.setEncodingStrategy(append);
+        String appendResult = encoder.getMessage(message);
+        System.out.println(appendResult);
 
     }
 
