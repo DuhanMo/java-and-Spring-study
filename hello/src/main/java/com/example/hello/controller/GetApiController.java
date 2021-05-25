@@ -1,9 +1,9 @@
 package com.example.hello.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.hello.dto.UserRequest;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/get")
@@ -23,9 +23,62 @@ public class GetApiController {
     }
 
     // http://localhost:9090/api/get/path-variable/{name}
+    // 매핑한것과 파라미터는 이름이 똑같아야함
+    @GetMapping("/path-variable/{name}")
+    public String pathVariable(@PathVariable(name = "name") String pathName) {
+        System.out.println("PathVariable : " + pathName);
 
-    @GetMapping("/path-variable")
-    public String pathVariable() {
+        return pathName;
+    }
+    // 쿼리파라미터 주로 검색할때 사용
+    // search?q=intellij
+    // &rlz=1C5CHFA_enKR914KR914
+    // &oq=intellij
+    // &aqs=chrome.0.69i59j69i60j69i61.1727j0j7
+    // &sourceid=chrome
+    // &ie=UTF-8
 
+    // ?key=value&key2=value2
+    // http://localhost:9090/api/get/query-param?user=steve&email=steve@gmail.com&age=30
+    @GetMapping(path = "/query-param")
+    public String queryParam(@RequestParam Map<String, String> queryParam) {
+        StringBuilder sb = new StringBuilder();
+        queryParam.entrySet().forEach(entry ->{
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue());
+            System.out.println("\n");
+
+            sb.append(entry.getKey() + " = " + entry.getValue()+"\n");
+
+        });
+        return sb.toString();
+    }
+
+    // Map으로 받으면 모든 Key를 받을 수 있지만 Key값이 뭔지 모름
+    // 그래서 명시적으로 RequestParam으로 다 선언을 해줌
+    // 하지만 파라미터가 많아진다면?
+    // 모든 걸 다 쓸수 없기때문에 스프링은 DTO 형식을 지원해준다
+    @GetMapping("/query-param02")
+    public String queryParam02(
+            @RequestParam String name,
+            @RequestParam String email,
+            @RequestParam int age
+    ) {
+        System.out.println(name);
+        System.out.println(email);
+        System.out.println(age);
+        return name + " " + email + " " + age;
+    }
+    //현업에서 제일 많이쓰는 방법 DTO 방법
+    // @RequestParam 이라는 어노테이션을 붙이지 않는다.
+    // 스프링부트 작동 원리
+    // 파라미터로 객체를 넣어놓으면 (여기선 UserRequest)
+    // 쿼리파라미터로 들어온 값을 자동으로 매핑해준다.
+    @GetMapping("/query-param03")
+    public String queryParam03(UserRequest userRequest) {
+        System.out.println(userRequest.getName());
+        System.out.println(userRequest.getEmail());
+        System.out.println(userRequest.getAge());
+        return userRequest.toString();
     }
 }
