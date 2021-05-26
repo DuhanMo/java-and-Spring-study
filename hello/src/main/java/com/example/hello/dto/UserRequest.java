@@ -31,10 +31,9 @@ public class UserRequest {
 
     @Override
     public String toString() {
-        return "UserRequest{" +
+        return
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", age=" + age +
-                '}';
+                ", age=" + age;
     }
 }
