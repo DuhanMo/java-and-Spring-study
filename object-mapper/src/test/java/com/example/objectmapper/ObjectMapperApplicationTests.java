@@ -21,7 +21,7 @@ class ObjectMapperApplicationTests {
 
         // object -> text
         // objectMapper 는 get메소드를 참조하기때문에 해당 DTO에 getter가 있어야함
-        var user = new User("모두한", 27);
+        var user = new User("모두한", 27, "010-2222-1212");
         var text = objectMapper.writeValueAsString(user);
         System.out.println(text);
 
