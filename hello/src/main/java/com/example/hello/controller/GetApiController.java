@@ -30,6 +30,13 @@ public class GetApiController {
 
         return pathName;
     }
+    @GetMapping("/path-variable/{name}/{age}")
+    public String pathVariableDto(UserRequest request) {
+        System.out.println("유저의 이름은? : " + request.getName());
+        System.out.println("유저의 나이는? : " + request.getAge());
+
+        return request.getName() + " , " + request.getAge();
+    }
     // 쿼리파라미터 주로 검색할때 사용
     // search?q=intellij
     // &rlz=1C5CHFA_enKR914KR914
