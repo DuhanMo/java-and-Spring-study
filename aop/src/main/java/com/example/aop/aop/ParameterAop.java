@@ -16,10 +16,7 @@ public class ParameterAop {
 
     // 메소드의 이름은 중요하지 않음, 룰을 설정함
     @Pointcut("execution(* com.example.aop.controller..*.*(..))") // 수식이 엄청많음. 컨트롤러 하위의 모든 메소드를 다 AOP로 보겠다
-    private void cut() {
-
-
-    }
+    private void cut() {}
     // 메소드 실행되기 전 아규먼트 확인, 메소드 이름 중요치않음
     @Before("cut()") // 포인트컷 메소드의 이름을 넣어줌
     public void before(JoinPoint joinPoint) {
