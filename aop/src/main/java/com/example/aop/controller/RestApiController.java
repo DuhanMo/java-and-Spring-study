@@ -1,5 +1,6 @@
 package com.example.aop.controller;
 
+import com.example.aop.annotation.Decode;
 import com.example.aop.annotation.Timer;
 import com.example.aop.dto.User;
 import org.springframework.web.bind.annotation.*;
@@ -21,5 +22,13 @@ public class RestApiController {
         // db logic 1초에서 2초가 걸린다고 했을 때.
         Thread.sleep(1000 * 2);
 
+    }
+    @Decode
+    @PutMapping("/put")
+    public User put(@RequestBody User user) {
+
+        System.out.println("put");
+        System.out.println(user);
+        return user;
     }
 }
