@@ -2,6 +2,7 @@ package com.example.client.service;
 
 import com.example.client.dto.UserRequest;
 import com.example.client.dto.UserResponse;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -67,13 +68,35 @@ public class RestTemplateService {
 
 
         RestTemplate restTemplate = new RestTemplate();
-
         // uri, 보내고싶은 객체와 받고싶은 타입
         ResponseEntity<UserResponse> response = restTemplate.postForEntity(uri, req,UserResponse.class);
         System.out.println(response.getStatusCode());
         System.out.println(response.getHeaders());
         System.out.println(response.getBody());
 
+
+        return response.getBody();
+    }
+    public UserResponse exchange() {
+        URI uri = UriComponentsBuilder
+                .fromUriString("http://localhost:9090")
+                .path("/api/server/user/{userId}/name/{userName}")
+                .encode()
+                .build()
+                .expand(101,"moduhanPathVar")
+                .toUri();
+        System.out.println(uri);
+        UserRequest req = new UserRequest();
+        req.setName("james2");
+        req.setAge(97);
+        RequestEntity<UserRequest> requestEntity = RequestEntity
+                .post(uri)
+                .header("x-authorization", "aaaa")
+                .header("custom-authorization", "This is Custom Auth!")
+                .body(req);
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<UserResponse> response = restTemplate.exchange(requestEntity, UserResponse.class);
 
         return response.getBody();
     }

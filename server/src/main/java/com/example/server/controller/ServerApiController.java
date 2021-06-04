@@ -21,8 +21,11 @@ public class ServerApiController {
     @PostMapping("/user/{userId}/name/{userName}")
     public User post(@RequestBody User user,
                      @PathVariable int userId,
-                     @PathVariable String userName){
+                     @PathVariable String userName,
+                     @RequestHeader("x-authorization") String auth,
+                     @RequestHeader("custom-authorization") String customAuth){
         log.info("userId : {} , userName : {} ", userId, userName);
+        log.info("auth : {} , custom Auth : {}", auth, customAuth);
         log.info("client req : {}", user);
 
         return user;
