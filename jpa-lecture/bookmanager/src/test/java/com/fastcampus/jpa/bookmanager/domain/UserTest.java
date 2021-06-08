@@ -17,6 +17,10 @@ class UserTest {
 
         User allArgUser = new User("james", "james95@gmail.com", LocalDateTime.now(), LocalDateTime.now());
         User ReqArgUser = new User("steve", "steve@test.com");
+        User user3 = User.builder()
+                .name("martin")
+                .email("martin@test.com")
+                .build();
 
         System.out.println(">>>" + user);
         System.out.println(">>>" + allArgUser);
