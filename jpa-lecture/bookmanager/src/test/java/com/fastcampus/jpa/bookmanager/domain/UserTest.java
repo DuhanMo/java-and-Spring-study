@@ -15,7 +15,7 @@ class UserTest {
         user.setEmail("moduhan@naver.com");
         user.setName("MoDuHan");
 
-        User allArgUser = new User("james", "james95@gmail.com", LocalDateTime.now(), LocalDateTime.now());
+        User allArgUser = new User(null,"james", "james95@gmail.com", LocalDateTime.now(), LocalDateTime.now());
         User ReqArgUser = new User("steve", "steve@test.com");
         User user3 = User.builder()
                 .name("martin")

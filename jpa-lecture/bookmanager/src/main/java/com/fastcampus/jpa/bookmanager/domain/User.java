@@ -2,6 +2,9 @@ package com.fastcampus.jpa.bookmanager.domain;
 
 import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @ToString // toString()을 오버라이딩 해주는 롬복 어노테이션
@@ -17,7 +20,12 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @Data // 엄청 많은 역할을 하는것같지만 OOP를 깨는 역할을 종종하기때문에 완벽한 어노테이션은 아님.
 @Builder // AllArgsConstructor와 비슷하게 객체를 생성하고 필드를 주입하는데 builder의 형식을 제공
+@Entity // Entity에는 프라이머리키가 반드시 필요함
 public class User {
+    @Id // 이 앤티티의 프라이머리키가 됨
+
+    @GeneratedValue // id 라는 숫자는 자동으로 증가하는 숫자값
+    private Long id;
     @NonNull // 이제 name을 필수적으로 넣어야 한다.
     private String name;
     @NonNull // RequiredArgsConstructor 이 작동됨
