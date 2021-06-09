@@ -1,0 +1,7 @@
+# h2 메모리디비를 이용하겠다.
+spring:
+  h2:
+    console:
+      enabled: true
+server:
+  port: 8070
