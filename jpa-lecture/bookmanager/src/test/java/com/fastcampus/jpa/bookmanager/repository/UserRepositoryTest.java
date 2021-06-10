@@ -1,24 +1,33 @@
-package com.fastcampus.jpa.bookmanager.repository;
+        package com.fastcampus.jpa.bookmanager.repository;
 
-import com.fastcampus.jpa.bookmanager.domain.User;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+        import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 
-import static org.junit.jupiter.api.Assertions.*;
+        import com.fastcampus.jpa.bookmanager.domain.User;
+        import org.junit.jupiter.api.Test;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.boot.test.context.SpringBootTest;
+        import org.springframework.data.domain.Example;
+        import org.springframework.data.domain.ExampleMatcher;
 
-@SpringBootTest // Spring Context를 로딩해서 테스트에 활용하겠다
+/**
+ * @author Martin
+ * @since 2021/03/10
+ */
+@SpringBootTest
 class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
     @Test
     void crud() { // create, read, update, delete
-        userRepository.save(new User()); // @NoArgs를 이용해 테이블에 저장하겠다
-        // 실제 서비스에서는 findAll 성능이슈때문에 잘 사용하지 않는다.
+        userRepository.save(new User());
+        User user = new User();
+        user.setEmail("slow");
 
-        System.out.println(">>>" + userRepository.findAll());
+        System.out.println(">>> " + userRepository.findAll());
+        ExampleMatcher matcher = ExampleMatcher.matching().withMatcher("email", contains());
+        Example<User> example = Example.of(user, matcher);
+
+        userRepository.findAll(example).forEach(System.out::println);
     }
-
-
 }

@@ -4,12 +4,15 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+/*
 @ToString // toString()을 오버라이딩 해주는 롬복 어노테이션
 @Getter //getter와 setter를 만들어주는 롬복의 어노테이션
 @Setter
+ */
 @NoArgsConstructor // 인자를 주지않고 new User로 생성하는 생성자 , JPA에서는 인자가 없는 생성자가 꼭 필요함
 @AllArgsConstructor // 모든 필드를 인자로 받아서 생성하는 생성자
 @RequiredArgsConstructor // 꼭 필요한 인자만을 받아서 생성해주는 생서자, 지금은 NoArgsConstructor와 같은 역할을함
@@ -23,7 +26,6 @@ import java.time.LocalDateTime;
 @Entity // Entity에는 프라이머리키가 반드시 필요함
 public class User {
     @Id // 이 앤티티의 프라이머리키가 됨
-
     @GeneratedValue // id 라는 숫자는 자동으로 증가하는 숫자값
     private Long id;
     @NonNull // 이제 name을 필수적으로 넣어야 한다.
