@@ -3,9 +3,10 @@ spring:
     console:
       enabled: true
   jpa:
-    show-sql: true
+    show-sql: true # 실제로 어떤 쿼리가 작동하는지 쿼리문을 보여줌
     properties:
       hibernate:
-        format_sql: true
+        format_sql: true # 쿼리문을 정렬해줌
+        # ORM 이란것은 자바 객체와 DB 레코즈와 매핑해주는 것이기때문에 최종적으로 작동하는 것은 SQL 쿼리가 됨
 server:
   port: 8070
