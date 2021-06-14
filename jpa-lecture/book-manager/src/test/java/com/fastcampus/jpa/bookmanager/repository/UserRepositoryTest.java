@@ -1,13 +1,15 @@
 package com.fastcampus.jpa.bookmanager.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
 
 import com.fastcampus.jpa.bookmanager.domain.User;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 
 import javax.transaction.Transactional;
 import java.sql.Date;
@@ -45,6 +47,55 @@ class UserRepositoryTest {
         Optional<User> user = userRepository.findById(1L); // 리턴되는 객체가 Optional로 래핑되어있음
         User user2 = userRepository.findById(1L).orElse(null); // Optional로 감싸지 않아도 됨 orElse를 하면
         System.out.println(user2);
+    }
+
+    @Test
+    void crud2() {
+//        userRepository.save(new User("moduhan", "moduhan@test.com"));
+//        userRepository.flush(); // 디비에 저장되는 시점을 조작하는 것으로 쿼리문에서는 변화를 볼 수 없다.
+//        userRepository.findAll().forEach(System.out::println);
+
+//        long count = userRepository.count();
+//        System.out.println(count);
+
+//        boolean exist = userRepository.existsById(1L);
+//        System.out.println(exist);
+
+//        userRepository.delete(userRepository.findById(1L).orElseThrow(RuntimeException::new));
+//        userRepository.deleteById(2L); // delete를 하기전 select쿼리를 실행하여 실제 값이 존재하는지 파악
+//
+//        userRepository.findAll().forEach(System.out::println);
+
+
+//        userRepository.deleteAll(userRepository.findAllById(Lists.newArrayList(1L, 3L))); 성능이슈 존재 (모든 행마다 delete를 실행하기 때문에) -> deleteInBatch를 씀
+//        userRepository.deleteInBatch(userRepository.findAllById(Lists.newArrayList(1L, 3L)));
+        // Batch 메소드 쓸 경우 한번의 delete문만 실행
+//        userRepository.findAll().forEach(System.out::println);
+
+        //페이징
+//        Page<User> users = userRepository.findAll(PageRequest.of(0, 3));
+//        System.out.println("page : " + users);
+//        System.out.println("totalElements : " + users.getTotalElements());
+//        System.out.println("totalPages : " + users.getTotalPages());
+//        System.out.println("numberOfElements : " + users.getNumberOfElements());
+//        System.out.println("sort : " + users.getSort());
+//        System.out.println("size : " + users.getSize());
+//
+//        users.getContent().forEach(System.out::println);
+
+        // 엔티티를 example로 만들고 matcher를 추가해서 선언함으로써 필요한 쿼리를 만드는 방법
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnorePaths("name") // 매칭에서 제외시키겠다. name은 제외시키겠다
+                .withMatcher("email", endsWith());
+
+        Example<User> example = Example.of(new User("ma", "fastcampus.com"), matcher);
+
+        User user = new User();
+        user.setEmail("slow");
+        ExampleMatcher matcher1 = ExampleMatcher.matching().withMatcher("email", contains());
+        Example<User> example1 = Example.of(user, matcher1);
+
+        userRepository.findAll(example1).forEach(System.out::println);
     }
 
 }
