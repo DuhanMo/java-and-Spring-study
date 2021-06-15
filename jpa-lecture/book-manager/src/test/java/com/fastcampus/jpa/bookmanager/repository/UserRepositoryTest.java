@@ -121,4 +121,17 @@ class UserRepositoryTest {
         System.out.println("findByIdBetween : " + userRepository.findByIdBetween(1L, 3L));
     }
 
+    @Test
+    void pagingAndSortingTest() {
+        System.out.println("findTop1ByName : " + userRepository.findTop1ByName("martin"));
+        System.out.println("findTop1ByNameOrderByIdDesc : " + userRepository.findTop1ByNameOrderByIdDesc("martin"));
+
+        System.out.println("findFirstByNameOrderByIdDescEmailAsc : " + userRepository.findFirstByNameOrderByIdDescEmailAsc("martin"));
+
+
+        System.out.println("findFirstByNameWirthSortParams :  " + userRepository.findFirstByName("martin", Sort.by(Sort.Order.desc("id"))));
+
+
+    }
+
 }

@@ -3,6 +3,7 @@ package com.fastcampus.jpa.bookmanager.repository;
 
 import com.fastcampus.jpa.bookmanager.domain.User;
 import jdk.vm.ci.meta.Local;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
@@ -35,7 +36,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findFirst2ByName(String name);
 
-    User findTop1ByName(String name);
+//    User findTop1ByName(String name);
 
     List<User> findByNameAndEmail(String name, String email);
 
@@ -54,6 +55,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByIdBetween(Long id1, Long id2);
 
 
+    User findTop1ByName(String name);
+    User findTop1ByNameOrderByIdDesc(String name);
+
+    // id에 역순 email에 정순
+    List<User> findFirstByNameOrderByIdDescEmailAsc(String name);
+
+    List<User> findFirstByName(String name, Sort sort);
 
 
 
