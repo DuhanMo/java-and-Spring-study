@@ -107,8 +107,18 @@ class UserRepositoryTest {
     }
 
     @Test
-    void read() {
+    void select() {
         System.out.println(userRepository.findByName("dennis"));
+        System.out.println(userRepository.findByNameAndEmail("martin","martin@fastcampus.com"));
+        System.out.println(userRepository.findByNameOrEmail("dennis","martin@fastcampus.com"));
+
+        System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByIdAfter : " + userRepository.findByIdAfter(3L));
+        System.out.println("findByCreatedAtGreaterThan : " + userRepository.findByCreatedAtGreaterThan(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByCreatedAtGreaterThanEqual : " + userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(1L)));
+
+        System.out.println("findByCreatedAtBetween : " + userRepository.findByCreatedAtBetween(LocalDateTime.now().minusDays(1L), LocalDateTime.now().plusDays(1L)));
+        System.out.println("findByIdBetween : " + userRepository.findByIdBetween(1L, 3L));
     }
 
 }

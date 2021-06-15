@@ -2,8 +2,10 @@ package com.fastcampus.jpa.bookmanager.repository;
 
 
 import com.fastcampus.jpa.bookmanager.domain.User;
+import jdk.vm.ci.meta.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -34,6 +36,25 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findFirst2ByName(String name);
 
     User findTop1ByName(String name);
+
+    List<User> findByNameAndEmail(String name, String email);
+
+    List<User> findByNameOrEmail(String name, String email);
+
+    List<User> findByCreatedAtAfter(LocalDateTime time);
+
+    List<User> findByIdAfter(Long id);
+
+    List<User> findByCreatedAtGreaterThan(LocalDateTime time);
+
+    List<User> findByCreatedAtGreaterThanEqual(LocalDateTime time);
+
+    List<User> findByCreatedAtBetween(LocalDateTime time1, LocalDateTime time2);
+
+    List<User> findByIdBetween(Long id1, Long id2);
+
+
+
 
 
 }
