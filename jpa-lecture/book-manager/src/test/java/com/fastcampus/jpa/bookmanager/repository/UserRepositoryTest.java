@@ -163,4 +163,27 @@ class UserRepositoryTest {
         System.out.println(userRepository.findRawRecord().get("gender")); // 값이 0 이 출력된다 ordinal 이기때문에.
 
     }
+    @Test
+    void prePersistTest() {
+        User user = new User();
+        user.setEmail("martin2@fastcampus.com");
+        user.setName("martin");
+//        user.setCreatedAt(LocalDateTime.now());
+//        user.setUpdatedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+
+        System.out.println(userRepository.findByEmail("martin2@fastcampus.com"));
+
+    }
+    @Test
+    void preUpdateTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+
+        System.out.println("as-is" + user);
+        user.setName("martin2");
+        userRepository.save(user);
+
+        System.out.println("to-bo" + userRepository.findAll().get(0));
+    }
 }
