@@ -177,6 +177,7 @@ class UserRepositoryTest {
         userRepository.save(user);
 
         System.out.println(userRepository.findByEmail("martin2@fastcampus.com"));
+        userRepository.findAll().forEach(System.out::println);
 
     }
     @Test

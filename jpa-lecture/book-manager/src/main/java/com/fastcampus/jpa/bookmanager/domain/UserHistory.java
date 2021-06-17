@@ -31,7 +31,7 @@ public class UserHistory extends BaseEntity implements Auditable {
 
     private String name;
 
-    private String emial;
+    private String email;
 
 //    @CreatedDate
 //    private LocalDateTime createdAt;
