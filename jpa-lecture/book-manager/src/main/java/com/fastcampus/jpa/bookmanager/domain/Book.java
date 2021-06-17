@@ -1,5 +1,6 @@
 package com.fastcampus.jpa.bookmanager.domain;
 
+import com.fastcampus.jpa.bookmanager.domain.listener.Auditable;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
