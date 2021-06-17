@@ -1,7 +1,6 @@
 package com.example.cleanbookmanager.domain;
 
 
-import com.example.cleanbookmanager.domain.listener.Auditable;
 import com.example.cleanbookmanager.domain.listener.UserEntityListener;
 import lombok.*;
 
@@ -18,7 +17,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull

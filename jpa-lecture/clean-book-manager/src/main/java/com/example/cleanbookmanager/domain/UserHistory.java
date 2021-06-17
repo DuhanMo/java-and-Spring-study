@@ -4,10 +4,7 @@ package com.example.cleanbookmanager.domain;
 import com.example.cleanbookmanager.domain.listener.UserEntityListener;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -16,7 +13,7 @@ import javax.persistence.Id;
 @EqualsAndHashCode(callSuper = true)
 public class UserHistory extends BaseEntity{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long userId;
