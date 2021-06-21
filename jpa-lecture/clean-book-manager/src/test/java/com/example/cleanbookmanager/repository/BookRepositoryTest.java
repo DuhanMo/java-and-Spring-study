@@ -16,6 +16,7 @@ public class BookRepositoryTest {
         book.setAuthorId(1L);
         book.setPublisherId(1L);
 
+
         bookRepository.save(book);
 
         System.out.println(bookRepository.findAll());

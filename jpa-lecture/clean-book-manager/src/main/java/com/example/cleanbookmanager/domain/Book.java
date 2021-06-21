@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Book extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     private String name;
 
@@ -27,6 +27,7 @@ public class Book extends BaseEntity{
 
     private Long publisherId;
 
-    @OneToOne
+    @OneToOne(mappedBy = "book")
+    @ToString.Exclude
     private BookReviewInfo bookReviewInfo;
 }

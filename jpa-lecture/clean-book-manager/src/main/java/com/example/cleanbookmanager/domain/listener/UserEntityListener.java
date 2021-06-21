@@ -6,13 +6,13 @@ import com.example.cleanbookmanager.domain.UserHistory;
 import com.example.cleanbookmanager.repository.UserHistoryRepository;
 import com.example.cleanbookmanager.support.BeanUtils;
 
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 
 public class UserEntityListener {
 
-    @PrePersist
-    @PreUpdate
+    @PostPersist
+    @PostUpdate
     public void prePersistAndUpdate(Object o) {
         UserHistoryRepository userHistoryRepository = BeanUtils.getBean(UserHistoryRepository.class);
 

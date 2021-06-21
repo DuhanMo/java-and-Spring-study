@@ -3,9 +3,12 @@ package com.example.cleanbookmanager.domain;
 
 import com.example.cleanbookmanager.domain.listener.UserEntityListener;
 import lombok.*;
+import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -28,5 +31,9 @@ public class User extends BaseEntity {
 
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private List<UserHistory> userHistories = new ArrayList<>();
 
 }

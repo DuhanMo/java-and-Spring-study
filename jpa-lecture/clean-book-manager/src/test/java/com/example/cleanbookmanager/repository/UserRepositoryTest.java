@@ -2,9 +2,12 @@ package com.example.cleanbookmanager.repository;
 
 import com.example.cleanbookmanager.domain.Gender;
 import com.example.cleanbookmanager.domain.User;
+import com.example.cleanbookmanager.domain.UserHistory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -62,5 +65,28 @@ class UserRepositoryTest {
     @Test
     void select() {
         userRepository.findAll().forEach(System.out::println);
+    }
+    @Test
+    void userHistoryTest() {
+        User user = new User();
+        user.setName("두한");
+        user.setGender(Gender.MALE);
+        user.setEmail("duhan@test.com");
+
+        userRepository.save(user);
+
+        user.setName("두한update");
+        userRepository.save(user);
+        user.setName("두한updateUpdate");
+        userRepository.save(user);
+
+
+//        List<UserHistory> result = userHistoryRepository
+//                .findByUserId(userRepository.findByEmail("duhan@test.com").getId());
+
+        List<UserHistory> result = userRepository.findByEmail("duhan@test.com").getUserHistories();
+
+        result.forEach(System.out::println);
+
     }
 }
