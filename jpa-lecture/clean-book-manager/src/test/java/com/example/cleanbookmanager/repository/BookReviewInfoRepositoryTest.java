@@ -44,7 +44,7 @@ class BookReviewInfoRepositoryTest {
         Book book = new Book();
         book.setName("Jpa 초격차 패키지");
         book.setAuthorId(1L);
-        book.setPublisherId(1L);
+//        book.setPublisherId(1L);
         book.setCategory("장편소설");
 
         return bookRepository.save(book);
