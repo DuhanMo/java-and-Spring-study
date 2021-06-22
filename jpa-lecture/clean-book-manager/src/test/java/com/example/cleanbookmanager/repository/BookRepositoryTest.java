@@ -39,10 +39,11 @@ public class BookRepositoryTest {
         givenBookAndReview();
 
         User user = userRepository.findByEmail("martin@fastcampus.com");
-
-        System.out.println("Review : " + user.getReviews());
-        System.out.println("Book : " + user.getReviews().get(0).getBook());
-        System.out.println("Publisher : " + user.getReviews().get(0).getBook().getPublisher());
+//
+//        System.out.println("Review : " + user.getReviews());
+//        System.out.println("Book : " + user.getReviews().get(0).getBook());
+//        System.out.println("Publisher : " + user.getReviews().get(0).getBook().getPublisher());
+        reviewRepository.findAll().forEach(System.out::println);
     }
 
     private void givenBookAndReview() {

@@ -39,4 +39,7 @@ public class Book extends BaseEntity{
     @OneToOne(mappedBy = "book")
     @ToString.Exclude
     private BookReviewInfo bookReviewInfo;
+
+    @ManyToMany
+    private List<Author> authors = new ArrayList<>();
 }
